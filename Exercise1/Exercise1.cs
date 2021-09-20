@@ -18,28 +18,27 @@ namespace Exercise_1
             StartDate = startDate;
             EndDate = endDate;
             GraduationDate = graduationDate;
+            if(GraduationDate == null) 
+            {
+                Status = Status.Dropout;
+            } 
+            else if(GraduationDate < DateTime.Now) 
+            {
+                Status = Status.Graduated;
+            } 
+            else if(DateTime.Now.AddMonths(-6) < StartDate)
+            {
+                Status = Status.New;
+            } else
+            {
+                Status = Status.Active;
+            }
         }
         
         public int Id {get; init;} 
         public string GivenName{get;}
         public string Surname {set; get;}
-        public Status Status {
-            get{
-            if(GraduationDate == null) 
-            {
-                return Status.Dropout;
-            } 
-            else if(GraduationDate < DateTime.Now) 
-            {
-                return Status.Graduated;
-            } 
-            else if(DateTime.Now.AddMonths(-6) < StartDate)
-            {
-                return Status.New;
-            } 
-
-            return Status.Active;
-        }}
+        public readonly Status Status;
         
         public DateTime StartDate {get; init;}
         public DateTime EndDate {get; init;}

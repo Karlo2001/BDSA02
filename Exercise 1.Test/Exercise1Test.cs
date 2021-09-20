@@ -12,8 +12,10 @@ namespace Exercise_1.Test
         // Retrieved from https://stackoverflow.com/a/62852186
         private static bool IsPropertyReadOnly<T>(string PropertyName)
         {
-            PropertyInfo info = typeof(T).GetMember(PropertyName)[0] as PropertyInfo;
+            return typeof(T).GetField(PropertyName).IsInitOnly;
+            /*PropertyInfo info = typeof(T).GetMember(PropertyName)[0] as PropertyInfo;
             return info.GetSetMethod() == null;
+            */
         }
 
         [Fact]
